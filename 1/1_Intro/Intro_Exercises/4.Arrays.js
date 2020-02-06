@@ -33,3 +33,34 @@ var diet = ["tomato", "cucumber", "rocolla", "kale"]
 
 diet.pop(); //deletes the last one and returns it
 console.log(diet);
+
+//Exercise 6 - Copy array
+
+var diet = ["tomato", "cucumber", "rocolla", "kale"]
+dinnerTray = diet.slice();
+console.log(dinnerTray);
+
+//Exercise 7 - For loop
+var letters = ["a","b","c", "d", "e", "f", "g", "h"];
+
+var i;
+for( i = 1; i < letters.length; i=i+2) {
+    console.log(letters[i]);
+}
+
+//Exercise 8 - For loop and if statement
+
+var numbers  = [5, 3, 2, 7, 11, 12, 0, -20, 6];
+var discardedNumbers = [];
+
+var i;
+for(i = 0; i < numbers.length; i++) {
+    if(numbers[i] < 0 || numbers[i] > 6) {
+       console.log(numbers[i]);
+    }
+    else {
+        discardedNumbers.push(numbers[i]);
+}
+    
+}
+    console.log("Added numbers:", discardedNumbers);
