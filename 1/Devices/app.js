@@ -13,6 +13,7 @@ let devices = [
     { id: 2, type: "smart watch"}
 ];
 
+let nextDeviceId = 3;
 
 app.get("/", (req, res) => {
     return res.send({ response: "This is my device API vs. 0.0.1" });
@@ -37,22 +38,43 @@ app.post("/test2", (req, res) => {
     res.send({"body": req.body});
 })
 */
+
+//post request and unique id
 app.post("/devices", (req, res) => {
     let newDevice = req.body;
     if(!newDevice.type) {
         return res.status(400).send({response: "Missing devices type"});
     }
-    const maxId = devices.reduce((previous, current) => {
-        if(current.id > previous.id) {
-            return current.id;
-        } else {
-            return previous.id;
-        }
-    });
-    newDevice.id = maxId + 1;
+    newDevice.id = nextDeviceId++;
     devices.push(newDevice);
+
+    console.log(devices);
    return res.send({response: newDevice}); 
    
+});
+
+//put request
+app.put("/devices/:id", (req, res) => {
+    const device = devices.find(device => device.id === Number(req.params.id));
+    let updatedDevice = req.body;
+
+    if(!updatedDevice.type) {
+        return res.status(400).send({response: "Missing devices type"});
+    }
+
+   // updatedDevice.id = device.id;
+    devices[device.id - 1].type = updatedDevice.type;
+
+    return res.send({response: updatedDevice});
+});
+
+app.delete("/devices/:id", (req,res) => {
+    
+    const newDevices = devices.filter(device => device.id !== Number(req.params.id));
+    
+    devices = newDevices;
+
+    return res.send({response: newDevices});
 });
 
 const server = app.listen(3000, (error) => {
