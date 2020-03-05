@@ -14,6 +14,7 @@ let devices = [
 ];
 
 let nextDeviceId = 3;
+// get requests
 
 app.get("/", (req, res) => {
     return res.send({ response: "This is my device API vs. 0.0.1" });
@@ -27,17 +28,6 @@ app.get("/devices/:id", (req, res) => {
     const device = devices.find(device => device.id === Number(req.params.id));
     return res.send({ response: device });
 });
-/*
-app.post("/test", (req, res) => {
-    console.log(req.body);
-    res.send({});
-})
-
-app.post("/test2", (req, res) => {
-    console.log(req.body);
-    res.send({"body": req.body});
-})
-*/
 
 //post request and unique id
 app.post("/devices", (req, res) => {
@@ -55,26 +45,19 @@ app.post("/devices", (req, res) => {
 
 //put request
 app.put("/devices/:id", (req, res) => {
-    const device = devices.find(device => device.id === Number(req.params.id));
-    let updatedDevice = req.body;
+    const foundIndex = devices.findIndex(device => device.id === Number(req.params.id));
+    delete req.body.id;
 
-    if(!updatedDevice.type) {
-        return res.status(400).send({response: "Missing devices type"});
-    }
+    const newDevice = {...devices[foundIndex], ...req.body};
+    devices[foundIndex] = newDevice;
 
-   // updatedDevice.id = device.id;
-    devices[device.id - 1].type = updatedDevice.type;
-
-    return res.send({response: updatedDevice});
+    return res.send({response: newDevice});
 });
 
+//delete request
 app.delete("/devices/:id", (req,res) => {
-    
-    const newDevices = devices.filter(device => device.id !== Number(req.params.id));
-    
-    devices = newDevices;
-
-    return res.send({response: newDevices});
+    devices = devices.filter(device => device.id !== Number(req.params.id));
+    return res.send({response: devices});
 });
 
 const server = app.listen(3000, (error) => {
