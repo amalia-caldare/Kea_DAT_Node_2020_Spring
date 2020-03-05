@@ -1,4 +1,12 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(express.json())
+
 
 let devices = [
     { id: 1, type: "computer"}, 
@@ -7,23 +15,45 @@ let devices = [
 
 
 app.get("/", (req, res) => {
-    return res.send({ about: "This is my device API vs. 0.0.1" });
+    return res.send({ response: "This is my device API vs. 0.0.1" });
 });
 
 app.get("/devices", (req, res) => {
-    return res.send({ devices: devices });
+    return res.send({ response: devices });
 });
 
 app.get("/devices/:id", (req, res) => {
     const device = devices.find(device => device.id === Number(req.params.id));
-    return res.send({ device: device });
+    return res.send({ response: device });
 });
-
+/*
 app.post("/test", (req, res) => {
-    console.log("test test test");
+    console.log(req.body);
     res.send({});
 })
 
+app.post("/test2", (req, res) => {
+    console.log(req.body);
+    res.send({"body": req.body});
+})
+*/
+app.post("/devices", (req, res) => {
+    let newDevice = req.body;
+    if(!newDevice.type) {
+        return res.status(400).send({response: "Missing devices type"});
+    }
+    const maxId = devices.reduce((previous, current) => {
+        if(current.id > previous.id) {
+            return current.id;
+        } else {
+            return previous.id;
+        }
+    });
+    newDevice.id = maxId + 1;
+    devices.push(newDevice);
+   return res.send({response: newDevice}); 
+   
+});
 
 const server = app.listen(3000, (error) => {
     if (error) {
