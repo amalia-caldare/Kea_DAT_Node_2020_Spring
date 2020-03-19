@@ -16,7 +16,7 @@
   "author": "Amalia",
   "license": "ISC",
   "dependencies": {
-    "cross-env": "^7.0.1",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1"
   }
 }

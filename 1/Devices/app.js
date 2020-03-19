@@ -60,9 +60,10 @@ app.delete("/devices/:id", (req,res) => {
     return res.send({response: devices});
 });
 
-const server = app.listen(3000, (error) => {
+const server = app.listen(2966, (error) => {
     if (error) {
         console.log("Error running the server");
     }
     console.log("Server is running on port", server.address().port);
 });
+
