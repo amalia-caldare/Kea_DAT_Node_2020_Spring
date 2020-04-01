@@ -9,9 +9,9 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(express.json())
 
-
 app.use(express.static('public'));
 app.use(express.static('videos'));
+
 
 // SSR -  server side rendoring
 const navbarPage = fs.readFileSync(__dirname + "/public/navbar/navbar.html","utf8");
@@ -19,7 +19,7 @@ const footerPage = fs.readFileSync(__dirname + "/public/footer/footer.html","utf
 
 const frontPage = fs.readFileSync(__dirname + "/public/frontpage/frontpage.html","utf8");
 const playerPage = fs.readFileSync(__dirname + "/public/player/player.html","utf8");
-
+const uploadPage = fs.readFileSync(__dirname + "/public/upload/upload.html", "utf8");
 
 
 app.get("/", (req, res) => {
@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
 app.get("/player/:videoid", (req, res) => {
 
     return res.send(navbarPage + playerPage + footerPage); });
+
+app.get("/upload", (req, res) => {
+    return res.send(navbarPage + uploadPage + footerPage);
+});
 
 // Import routes
 const videosRoute = require("./routes/videos");
