@@ -45,8 +45,33 @@ router.get("/videos/:videoId", (req, res) => {
 });
 
 router.post("/videos", upload.single('video'), (req, res) => {
-    console.log(req.file);
-    return res.redirect("/");
+
+    let errors = []
+
+    const video = {
+        fileName: req.file.fileName,
+        title: req.body.tile ? req.body.title: "",
+        description: req.body.description ? req.body.description: "",
+        thumbnail: "", //todo
+        category: req.body.category ? req.body.category: "uknown",
+        tags: req.body.tags.split(/\s*[,\s]\s*/),
+        uploadDate: new Date()
+    };
+
+    if(video.title.length < 8 || video.title.length > 64) {
+        errors.push("Title can't be between 8 and 63.")
+    }
+
+    if(video.description.length > 2048) {
+        errors.push("The description can't be longer than 20148 chars.")
+    }
+
+    if(errors.length > 0) {
+        return res.send({response: errors});
+    } else {
+        videos.push(video);
+        return res.redirect("/player" + video.fileName);
+    }
 });
 
 module.exports = router; 
