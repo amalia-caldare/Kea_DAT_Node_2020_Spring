@@ -1,8 +1,18 @@
 <script src="/upload/upload.js"></script>
 <h1>Upload</h1>
-<form action="/videos" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+<form action="/videos" method="POST" enctype="multipart/form-data" name="videoupload" onsubmit="return validateForm()">
     <input name="title" placeholder="title" />
     <textarea name="description" placeholder="description" rows="6"></textarea>
-    <input type="file" name="video" accept="video/*" />
+    <select name="category" placeholder="category">
+        <option value="comedy">Comedy</option>
+        <option value="education">Education</option>
+        <option value="music">Music</option>
+        <option value="nature">Nature</option>
+        <option value="politics">Politics</option>
+        <option value="science">Science</option>
+        <option value="sports">Sports</option>
+    </select>
+    <input name="tags" placeholder="commma-separated tag">
+    <input type="file" name="video" accept="video/*" onchange = "handlefileUpload(this.files)" />
     <button type="submit">Submit</button>
 </form> 
