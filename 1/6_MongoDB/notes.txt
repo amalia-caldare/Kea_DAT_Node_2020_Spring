@@ -1,0 +1,49 @@
+Relational Databases vs. NoSQL
+
+MySQL               MongoDB(document database)
+MariaDB             DynamoDB
+Oracle              Firebase
+PostgreSQL          Realm(object database)
+CouchDB             Neo43
+
+tables              collections (like table, arrays that are contained in the databases)      
+
+collections: furniture
+{}
+
+    {
+        "key": "value"
+    },
+
+    {
+        "price": 20.00
+    },
+
+    {
+
+    }
+}
+
+Use Cases of MongoDB: 
+
+Do use:
+
+- not sure about schema yet
+    - leads to rapid prototyping
+        - type of companies: start-ups
+
+Don't use:
+
+- data that is consistent or relational
+
+- data that is crucial
+
+- if you have a set schema
+
+
+More info:
+     - in MongoDb you handle relations, data validation etc. in the application layer
+     - for relational database you can also do it in the application layer
+                      but the database is another safety net
+
+Performance: benchmark MongoDb
