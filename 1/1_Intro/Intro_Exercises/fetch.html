@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+</head>
+<body>
+    <h1>Bored?</h1>
+    <h3>Why don't you...</h3>
+    <p></p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        fetch("https://www.boredapi.com/api/activity")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('activity').textContent = data.activity;
+        });
+     </script>
+</body>
+</html>
