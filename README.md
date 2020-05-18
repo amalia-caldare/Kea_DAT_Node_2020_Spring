@@ -2,7 +2,7 @@
 
 # Node.js Elective. 
 # This repository contains different topics that I have touched during the elective:
-- JavaScript concept
+- JavaScript concepts
 - Express
 - jQuery and Ajax
 - MongoDb
