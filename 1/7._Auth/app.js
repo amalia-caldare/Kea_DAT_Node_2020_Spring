@@ -4,23 +4,30 @@ const app = express();
 // body parser
 app.use(express.json());
 
-// import auth router module
+// Setup Knex with Objection
+
+const {Model} = require('objection');
+const Knex = require('knex');
+const knexfile = require('./knexfile.js');
+
+const knex = Knex(knexfile.development);
+
+// give the knex instance to objection
+Model.knex(knex);
+
+// Setup the routes with app
+
+app.use((req, res) => {
+    console.log("Time of request: ", new Date());
+    return res.send();
+});
+
 const authRoute = require('./routes/auth.js');
 const usersRoute = require('./routes/users.js');
 
 app.use(authRoute);
 app.use(usersRoute);
 
-// imports ORM
-const {Model} = require('objection');
-const Knex = require('knex');
-const knexfile = require('./knexfile.js');
-
-// initialize knex
-const knex = Knex(knexfile.development);
-
-// give the knex instance to objection
-Model.knex(knex);
 
 app.get('/', async (req,res) => {
     // knex('users').select().then(users => {
