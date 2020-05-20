@@ -37,7 +37,7 @@ router.post('/signup', (req,res) => {
         }
     } 
     else {
-        return res.status(500).send({response: "Something went wrong"});
+        return res.status(500).send({response: "Username or password missing"});
     }
 });
 

@@ -6,7 +6,10 @@ app.use(express.json());
 
 // import auth router module
 const authRoute = require('./routes/auth.js');
+const usersRoute = require('./routes/users.js');
+
 app.use(authRoute);
+app.use(usersRoute);
 
 // imports ORM
 const {Model} = require('objection');
