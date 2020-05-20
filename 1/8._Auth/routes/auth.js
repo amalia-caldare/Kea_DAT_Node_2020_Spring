@@ -16,12 +16,18 @@ router.post('/signup', (req,res) => {
             return res.status(400).send({responde: "Password must be 8 characters"});
         } else {
             try {
-                User.query().select().where('username', username).then(user =>{
-                    return res.send({response: user});
+                User.query().select('username').where('username', username).then(foundUser =>{
+                    if(foundUser.length > 0) {
+                        return res.status(400).send({responde: "User already exists"});
+
+                    } else {
+                        
+                    }
+                    return res.send({response: foundUser});
                 });   
                 
-            } catch {
-                return res.status(500).send({response: "Db error"});
+            } catch (error) {
+                return res.status(500).send({response: "Something went wrong with the DB"});
             }
         }
     } 
