@@ -11,7 +11,7 @@ const saltRounds = 12;
 //     .then(result => console.log(result));
 
 router.post('/login', (req,res) => {
-    
+
     // 1. get data from the request
     // 2. validate data
     // 3. check if user exists and get the password
@@ -22,9 +22,6 @@ router.post('/login', (req,res) => {
 });
 
 router.post('/signup', (req,res) => {
-    // User.query().select().then(users => {
-    //     return res.status(501).send({response: users});
-    // });
     const {username, password } = req.body;
     if( username && password) {
         if(password.length < 9) { 
@@ -60,7 +57,5 @@ router.post('/signup', (req,res) => {
 router.get('/logout', (req,res) => {
     return res.status(501).send({response: 'Not implemented'});
 });
-
-
 
 module.exports = router;
