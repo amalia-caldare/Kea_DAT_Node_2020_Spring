@@ -22,7 +22,9 @@ Model.knex(knex);
 app.get('/', async (req,res) => {
     // knex('users').select().then(users => {
     //     return res.send({response: users});
-    // })
+    // }).catch(error => {
+       // return res.status(400).send({response: error});
+   // })
     return res.send({response: await knex('users').select()});
 }); 
 

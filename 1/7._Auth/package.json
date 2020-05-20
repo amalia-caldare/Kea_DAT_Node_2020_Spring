@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "createdb": "knex migrate:rollback && knex migrade:latest && knex seed:run",
+    "createdb": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "migrate:make": "knex migrate:make",
     "migrate:latest": "knex migrate:latest",
     "migrate:rollback": "knex migrate:rollback",
